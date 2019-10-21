@@ -1,0 +1,29 @@
+{
+    "department_id": "hr12345",
+    "events": [{
+            "training_name": "intern training",
+            "description": "nothing",
+            "duration": "30 min",
+            "department_name": "HR",
+            "date_time": "10/20/2019",
+            "meeting_room": "1"
+        },
+        {
+            "training_name": "HR-P",
+            "description": "nothing",
+            "duration": "1 hour",
+            "department_name": "HR",
+            "date_time": "11/20/2019",
+            "meeting_room": "2"
+        },
+        {
+            "training_name": "HR- payroll",
+            "description": "null",
+            "duration": "1 hour",
+            "department_name": "HR",
+            "date_time": "12/20/2019",
+            "meeting_room": "4"
+        }
+    ]
+
+}

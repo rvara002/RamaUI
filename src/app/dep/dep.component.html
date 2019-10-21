@@ -1,0 +1,51 @@
+<app-header></app-header>
+
+<div style="min-height: 450px;">
+    <div class="button-container">
+        <button type="button" class="button-outline" [ngClass]="{'button-active': isHrselected, 'button-inactive': !isHrselected}"
+            (click)="getUpcomingeventshr()">HR </button>
+        <button type="button" class="button-outline" [ngClass]="{'button-active': isItselected, 'button-inactive': !isItselected}"
+            (click)="getUpcomingeventsit()">IT</button>
+        <button type="button" class="button-outline" [ngClass]="{'button-active': isPeselected, 'button-inactive': !isPeselected}"
+            (click)="getUpcomingeventspe()">PE</button>
+        <button type="button" class="button-outline" [ngClass]="{'button-active': isFinanceselected, 'button-inactive': !isFinanceselected}"
+            (click)="getUpcomingeventsfinance()">Finance</button>
+        <button type="button" class="button-outline" routerLink="/save">Schedule new event</button>
+    </div>
+    <div class="search-container" *ngIf="result">
+        <input type="search" placeholder="Search for events..." [(ngModel)]="searchEvent">
+    </div>
+    <div class="event-row">
+        <div *ngFor="let event of result.events | filterBy: searchEvent" class="event">
+            <div class="event-header">
+                <span [innerHtml]="event.training_name | highlight: searchEvent"></span>
+                <button type="button" class="edit-button" (click)="editEvent(event, result.department_id)" title="Edit Event">Edit</button>
+            </div>
+            <div class="event-body">
+                <div class="event-item">
+                    <b>Date Time: </b>
+                    <span class="event-item-value">{{event.date_time}}</span>
+                </div>
+                <div class="event-item">
+                    <b>Department Name: </b>
+                    <span class="event-item-value">{{event.department_name}}</span>
+                </div>
+                <div class="event-item">
+                    <b>Description: </b>
+                    <span class="event-item-value">{{event.description}}</span>
+                </div>
+                <div class="event-item">
+                    <b>Duration: </b>
+                    <span class="event-item-value">{{event.duration}}</span>
+                </div>
+                <div class="event-item">
+                    <b>Meeting Room: </b>
+                    <span class="event-item-value">{{event.meeting_room}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!result.events.length">
+        <span style="height: 400px;">No Events scheduled !</span>
+    </div>
+</div>

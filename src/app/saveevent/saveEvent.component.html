@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="login-page">
+    <h4 >Create/Update a training event below and click on  save/cancel to route back to department page:</h4>
+    <div class="form">
+        <div style="min-height: 450px">
+            <form class="login-form">
+                Training Name*: <input [(ngModel)]="training_name" name="training_name" type="text" placeholder="Training Name*" />
+               Description: <input [(ngModel)]="description" name="description" type="text" placeholder="Description" />
+                Duration*: <input [(ngModel)]="duration" name="duration" type="number" placeholder="Duration*" />
+               Department-name*: <input [(ngModel)]="department_name" name="department" type="text" placeholder="Department*" />
+               Date and time*: <input [(ngModel)]="date_time" name="date_time" type="text" placeholder="Date Time*" />
+                Meeting room* :<input [(ngModel)]="meeting_room" name="meeting_room" type="text" placeholder="Meeting Room*" />
+
+                <button style="margin: 10px;" (click)="savenewEvent()">Save</button>
+            
+                <button style="margin: 10px;" routerLink="/dep" >Cancel</button>
+
+            </form>
+        </div>
+    </div>
+</div>
