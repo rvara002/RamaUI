@@ -29,9 +29,9 @@ describe('Component: Projects', () => {
     expect(wrapper.hasClass('.title')).toBe(true);
   });
 
-  it('shoul pass correct prrops to project component', () => {
+  it('should pass correct props to project component', () => {
     const props = getMinimimProps();
-    
+
     const project ={
         id: 1,
         title: 'Global Centro (UI/UX Lead)',
@@ -40,7 +40,7 @@ describe('Component: Projects', () => {
         image: project1
       };
     
-    const wrapper = renderApp(props);
+    const wrapper = renderProjects(props);
     
     const expectedProps = {
       className :'project',

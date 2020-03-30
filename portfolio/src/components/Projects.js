@@ -25,7 +25,7 @@ class Projects extends Component {
         <div className='project'>
             {PROJECTS.map(PROJECT => {
                 return(
-                    <Project className='' key={PROJECT.id} project={PROJECT}/>
+                    <Project className='project' key={PROJECT.id} project={PROJECT}/>
                 )})
             }
         </div>

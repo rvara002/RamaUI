@@ -38,4 +38,26 @@ describe('Component: Header', () => {
 
     expect(wrapper.find('.home').props().toMatchObject(expectedProps));
   });
+
+  it('should render correct props for Link youtube component', () => {
+    const props = getMinimimProps();
+    const wrapper = renderApp(props);
+    const expectedProps = {
+      className :'youtube',
+      to: '/Youtube'
+    };
+
+    expect(wrapper.find('.youtube').props().toMatchObject(expectedProps));
+  });
+
+  it('should render correct props for Link music-master component', () => {
+    const props = getMinimimProps();
+    const wrapper = renderApp(props);
+    const expectedProps = {
+      className :'music-master',
+      to: '/music-master'
+    };
+
+    expect(wrapper.find('.music-master').props().toMatchObject(expectedProps));
+  });
 })

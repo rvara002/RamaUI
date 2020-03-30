@@ -10,3 +10,4 @@ describe('Component: ConfigureCache', () => {
 const renderComponnent = (props, isDeep) => isDeep
   ? mount(<Menu {...props} />)
   : shallow(<Menu {...props} />);
+})

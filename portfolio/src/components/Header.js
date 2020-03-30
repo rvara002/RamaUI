@@ -11,9 +11,9 @@ const Header = ({ children }) => {
   return (
     <div className='header'>
       <div className='links'>
-        <h3 className='style={style}><Link to='/'>Home</Link></h3>
-        <h3 style={style}><Link to='/Youtube'>Youtube</Link></h3>
-        <h3 style={style}><Link to='/music-master'>Music Master</Link></h3>
+        <h3 style={style}><Link className='home' to='/'>Home</Link></h3>
+        <h3 style={style}><Link className='youtube' to='/Youtube'>Youtube</Link></h3>
+        <h3 style={style}><Link className='music-master' to='/music-master'>Music Master</Link></h3>
       </div>
       {children}
     </div>
