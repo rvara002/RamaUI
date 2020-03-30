@@ -1,32 +1,20 @@
-# Angular 4 Sample APP
+# React JS Web Development - The Essentials Bootcamp
+"React JS Web Development - The Essentials Bootcamp": Official guide repo used to accompany video lessons.
 
-This source code is part of tutorial[Getting Started Angular 4 using Angular CLI](https://www.djamware.com/post/58d9a49b80aca7105ed7d3f7/getting-started-angular-4-using-angular-cli)
+This provides the completed projects for:
+- music-master
+- portfolio
+- all legacy projects
 
-# AngularApp
+Snippet from the course description:
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+*In this course, you will:*
 
-## Development server
+**Dive into React code right away**. You will gain relevant experience as soon as the first section. Time is precious. And I want to make sure that you’ll never feel like you’re wasting it in this course. So in a matter of minutes, you will be writing React code in the first section, with a fully completed app by the end of it.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**Understand how React fits in the big picture of web development**. In the second section, you will take an important step back and examine how React fits in the big picture of web development. You’ll build a React project from scratch - discovering all the layers that are in between the supplies that supports the React app, and the browser which displays the React app.
 
-## Code scaffolding
+**Create relevant and compelling React apps**. I’m betting you’ll find the apps both useful and interesting. Useful ones like the portfolio app will help you both learn React, and be valuable as a completed project for your software engineering and web developer profile. Fun ones like “Music Master”, will make coding lively, giving you apps you want to show off to your friends and family.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Check out the original course:
+https://www.udemy.com/react-js-and-redux-mastering-web-apps/
