@@ -1,5 +1,8 @@
 import React from "react"
-import "./sideNav.css"
+import "./sideNav.css";
+import {subscriber, messageService} from '../messageService'
+
+
 
 class SideNav extends React.Component {
   constructor(){
@@ -8,10 +11,14 @@ class SideNav extends React.Component {
       state: {
         showNav: false
       },
-      listSubreddit: []
+      listSubreddit: [],
+      activeLink: null
     }
     this.renderPosts = this.renderPosts.bind(this);
   }
+  handleClick = id => {
+    this.setState({ activeLink: id });
+  };
 
   componentDidMount() {
     this.renderPosts();
@@ -45,7 +52,7 @@ class SideNav extends React.Component {
           arraySubreddit.push(currPost)
         }
 
-       this.setState({ ...this.state, listSubreddit: arraySubreddit });
+       this.setState({ ...this.state, listSubreddit: arraySubreddit});
       })
       .catch(function (err) {
         console.log(err); // Log error if any
@@ -74,9 +81,11 @@ class SideNav extends React.Component {
     }
   }
 
+
   render() {
     const { listSubreddit } = this.state;
-    const { showNav } = this.state
+    const { showNav } = this.state;
+    const {activeLink} = this.state;
     let navCoverStyle = { width: showNav ? "100%" : "0" }
     let sideNavStyle = { width: showNav ? "500px" : "0" };
     
@@ -93,6 +102,8 @@ class SideNav extends React.Component {
           style={navCoverStyle}
         />
         <div name="side-nav" class="side-nav" style={sideNavStyle}>
+
+          
           <a href="#" onClick={this.closeNavClick} class="close-nav">
             &times;
           </a>
@@ -101,8 +112,14 @@ class SideNav extends React.Component {
      {
         listSubreddit.map((currPost, index) => {
           return (
-            <div key={index}>
-              <div> <a href="#">{currPost.title}</a> </div>
+            <div  class= "subredditlist"  onClick = {(e) => subscriber.next({title: currPost.title, url: currPost.url}) } key={index}>
+              <div  onClick={() => this.handleClick(currPost.title)}
+                  className={
+                    currPost.title.className === activeLink ? "sub" : "" +
+                    (currPost.title === activeLink ? "sub " : "")
+                  }
+                >
+                  {currPost.title} {currPost.title === activeLink && "active!"} </div>
             </div> 
           )
         })

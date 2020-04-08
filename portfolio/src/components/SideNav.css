@@ -38,6 +38,16 @@
   .side-nav a:hover {
     color: #f1f1f1;
   }
+  .side-nav a:active {
+    color: red;
+  }
+  .subredditlist :hover{
+    color: #f1f1f1;
+    cursor: pointer;
+  }
+  .sub {
+    color: red;
+  }
   
   .side-nav .close-nav {
     position: absolute;

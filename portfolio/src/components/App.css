@@ -6,7 +6,7 @@
   }
   
   .options {
-    width: 165px;
+    width: 35%;
     margin: 0 auto;
     font-weight: bold;
   }
@@ -64,7 +64,20 @@
   .subreddit{
     border: 1px solid black;
     margin: 10px;
+    height: 600px;
+  }
+  .junioursubreddit{
+    font-weight: bold;
+    border: 1px solid black;
+    margin: 10px;
     height: 200px;
+  }
+  .sub {
+    color: yellow;
+  }
+  .subreddit :active {
+    color: yellow;
+    cursor: pointer;
   }
 
   .subreddit :hover {

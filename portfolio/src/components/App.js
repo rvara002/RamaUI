@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import SideNav from './SideNav';
 import "./App.css";
-import Panel from './Panel';
 import Select from 'react-select';
+import {subscriber, messageService } from "../messageService";
 
 class App extends Component {
 
@@ -11,51 +11,29 @@ class App extends Component {
     this.state = {
       listPosts: [],
       value: { label: this.props.val, value: this.props.val },
-      showPanel : false,
-      title:'', author: '', selftext:'', url: ''
+      showPanel : false, activeLink: null,
+      title:'', author: '', selftext:'', url: '', selectedSubreddit:'javascript' , x: '', y: '', e:'', z:'',a:''
     };
     this.renderPosts = this.renderPosts.bind(this);
-    this.onClickSubreddit = this.onClickSubreddit.bind(this);
+    this.handlePanel = this.handlePanel.bind(this);
   }
-  options = [
-    { label: "Hot", value: 'hot' },
-    { label: "New", value: 'new' },
-    { label: "Top", value: 'top' },
-    { label: "random", value: 'Random' },
-    { label: "Rising", value: 'rising' }
-  ];
+
   componentDidMount() {
-    this.renderPosts({ label: "Hot", value: 'hot' });
+    subscriber.subscribe((v)=>{
+      // let {selectedSubreddit} = this.state.selectedSubreddit;
+      this.state.selectedSubreddit = v;
+      this.renderPosts({ label: "Top", value: 'top', selectedSubreddit: this.state.selectedSubreddit });
+    });
   }
-  onClickSubreddit(currPost){
-    this.setState({showPanel: true, title: currPost.title, author: currPost.author, url: currPost.url, selftext: currPost.selftext})
-    console.log('calling',currPost);
-  //   return (
-  //     <Panel
-  // title = {currPost.title}
-  // author = {currPost.author}
-  // selftext = {currPost.selftext}
-  // url = {currPost.url} />
-  //   );
-  console.log('showPanel',this.state.showPanel);
-  return( this.state.showPanel ? 
-    <div className='show-content'style="background: red; font-size: 40px;"> some data to test it </div> 
-    : <div className='no-content'>nottrue</div>)
-    //   <div style="background: red;">
-    //   <div class="title"> {currPost.title} </div>
-    //   <div class="content">
-    //     {currPost.selftext}
-    //     <span>${currPost.url}</span>
-    //   </div>
-    //   <div class="author"> Posted by {currPost.author} </div>
-    // </div>
-  
-  }
+  handleClick = id => {
+    this.setState({ activeLink: id });
+  };
+
  
   renderPosts = (postType) => {
-    this.setState({ value: postType })
-    console.log("postType", postType.value)
-    fetch(`https://www.reddit.com/r/javascript/${postType.value}.json`)
+    this.setState({ value: postType });
+    // this.setState({ selectedSubreddit: decodeURIComponent(this.state.selectedSubreddit)})
+    fetch(`https://www.reddit.com${postType.selectedSubreddit.url}${postType.value}.json`)
       .then((res) => {
         // Return the response in JSON format
         console.log(res.json)
@@ -69,7 +47,7 @@ class App extends Component {
         for (let i = 0; i < posts.length; i++) {
           let currPost = posts[i].data;
           arrayPosts.push(currPost)
-          console.log(this.state.listPosts, 'currPosttitle', currPost.title, 'selfdabba', currPost.selftext, 'url', currPost.url, 'author', currPost.author, currPost.subreddit)
+          // console.log(this.state.listPosts, 'currPosttitle', currPost.title, 'selfdabba', currPost.selftext, 'url', currPost.url, 'author', currPost.author, currPost.subreddit)
         }
         this.setState({ ...this.state, listPosts: arrayPosts });
       })
@@ -78,28 +56,40 @@ class App extends Component {
 
       });
   };
+  handlePanel(e, x,y,z,a){
+    console.log(e,x,y)
+    this.setState({
+      x: x,
+      y: y,
+      z:z,
+      a:a
+    });
+  }
 
   render() {
     const { listPosts } = this.state;
+    const {activeLink} = this.state;
     return listPosts.length ? (
       <div>
+        <br></br>
+<p class="junioursubreddit">The current selected post  is 
+( title: {this.state.x}, <br></br> url:  {this.state.y}, <br></br> selftext: {this.state.z}, <br></br> author: {this.state.a})</p>
         <React.Fragment>
-          <h1>List of posts for Selected Subreddit</h1>
+    <h1>Selected  Subreddit: '{this.state.selectedSubreddit.title}'</h1>
           <SideNav />
         </React.Fragment>
-        <div class="options">
-          <label>Post Type:</label>
-          <Select options={this.options}
-            value={this.state.value}
-            onChange={value => this.renderPosts(value)}
-            class="post-type" />
-        </div>
         <div>
           {
             // <div>{listPosts.length}</div>
             listPosts.map((currPost, index) => {
               return (
-                <div className='subreddit' key={index} onClick={(currPost) => this.onClickSubreddit(currPost)}>
+<div  onClick={() => this.handleClick(currPost.title, currPost.url, currPost.selftext, currPost.author)}
+                  className={
+                    currPost.title.className === activeLink ? "sub" : "" +
+                    (currPost.title === activeLink ? "sub " : "")
+                  }>
+                <div className='subreddit' key={index}  onClick={ (e) => this.handlePanel(e,currPost.title, currPost.url, currPost.selftext, currPost.author )}>
+
                   <div class="title"> {currPost.title} </div>
                   <div class="content">
                     {currPost.selftext}
@@ -108,27 +98,19 @@ class App extends Component {
                   </div>
                   <div class="author"> Posted by {currPost.author} </div>
                   <br></br>
+                 
                   <div>
+              
 </div>
-                </div>
-
-               
+</div>
+</div>
               )
             })
           }
 
-     {/* <div>
-      <div class="title"> {this.state.title} </div>
-      <div class="content">
-     {this.state.selftext}
-     <span>${this.state.url}</span>
-    </div>
-    <div class="author"> Posted by {this.state.author} </div>
-    </div> */}
         </div>
       </div>
     ) : (<div>Loading...</div>);
   }
 }
-// App.defaultProps = { listPosts: [] };
 export default App;
