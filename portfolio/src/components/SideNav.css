@@ -41,6 +41,11 @@
   .side-nav a:active {
     color: red;
   }
+  .subredditlist {
+    color: lightblue;
+    cursor: pointer;
+    margin: 15px 0;
+  }
   .subredditlist :hover{
     color: #f1f1f1;
     cursor: pointer;

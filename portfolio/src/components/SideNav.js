@@ -119,7 +119,7 @@ class SideNav extends React.Component {
                     (currPost.title === activeLink ? "sub " : "")
                   }
                 >
-                  {currPost.title} {currPost.title === activeLink && "active!"} </div>
+                  {currPost.title} {currPost.title === activeLink} </div>
             </div> 
           )
         })
