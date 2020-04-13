@@ -16,7 +16,9 @@ class App extends Component {
       titlepost: "",
       urlpost: "",
       selftextpost: "",
-      authorpost: "",
+      url: "",
+      searchText: null,
+      selectedPost: "top",
     };
     this.renderPosts = this.renderPosts.bind(this);
     this.handlePanel = this.handlePanel.bind(this);
@@ -39,7 +41,9 @@ class App extends Component {
   onImageLoad = (event) => {};
 
   renderPosts = (postType) => {
+    //call api for  selected subreddit and post selected
     this.setState({ value: postType });
+
     fetch(
       `https://www.reddit.com${postType.selectedSubreddit.url}${postType.value}.json`
     )
@@ -70,6 +74,16 @@ class App extends Component {
       authorpost: authorpost,
     });
   }
+  sendPosttype = (value) => {
+    //send selected post type based on user click
+    this.setState({
+      selectedPost: value,
+    });
+    this.renderPosts({
+      selectedSubreddit: this.state.selectedSubreddit,
+      value: this.state.selectedPost,
+    });
+  };
 
   render() {
     const {
@@ -85,6 +99,9 @@ class App extends Component {
         <br></br>
 
         <React.Fragment>
+          <h1>Toggle between post type below: </h1>
+          <button onClick={() => this.sendPosttype("top")}>top</button>
+          <button onClick={() => this.sendPosttype("new")}>new</button>
           <h1>Selected Subreddit: '{this.state.selectedSubreddit.title}'</h1>
           <SideNav />
           <p class="junioursubreddit">

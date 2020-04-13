@@ -11,8 +11,12 @@ class SideNav extends React.Component {
       },
       listSubreddit: [],
       activeLink: null,
+      selftextpost: "",
+      searchText: null,
     };
     this.renderPosts = this.renderPosts.bind(this);
+    this.searchPosts = this.searchPosts.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
   handleClick = (id) => {
     this.setState({ activeLink: id });
@@ -74,7 +78,39 @@ class SideNav extends React.Component {
       this.closeNav();
     }
   };
+  handleChange = ({ target }) => {
+    this.setState({
+      [target.name]: target.value,
+    });
+  };
+  searchPosts() {
+    //search subreddit based on user entered input
+    if (this.state.searchText == null) {
+      return;
+    } else {
+      fetch(
+        `https://www.reddit.com/subreddits/search.json?q=${this.state.searchText}
+      `
+      )
+        .then((res) => {
+          // Return the response in JSON format
+          return res.json();
+        })
+        .then((res) => {
+          const posts = res.data.children;
+          let arraySubreddit = [];
+          for (let i = 0; i < posts.length; i++) {
+            let currPost = posts[i].data;
+            arraySubreddit.push(currPost);
+          }
 
+          this.setState({ ...this.state, listSubreddit: arraySubreddit });
+        })
+        .catch(function (err) {
+          console.log(err); // Log error if any
+        });
+    }
+  }
   render() {
     const { listSubreddit } = this.state;
     const { showNav } = this.state;
@@ -88,6 +124,7 @@ class SideNav extends React.Component {
           <span onClick={this.openNavClick} class="open-nav">
             &#9776; Click to select a Subreddit
           </span>
+
           <div
             onClick={this.navCoverClick}
             class="nav-cover"
@@ -98,6 +135,13 @@ class SideNav extends React.Component {
               &times;
             </a>
             <div>List of Subreddit's</div>
+            <input
+              onChange={this.handleChange}
+              value={this.state.searchText}
+              type="text"
+              name="searchText"
+            ></input>
+            <button onClick={this.searchPosts}>Search</button>
             <div>
               {listSubreddit.map((currPost, index) => {
                 return (
