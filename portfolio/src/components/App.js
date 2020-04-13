@@ -137,7 +137,7 @@ class App extends Component {
                       {currPost.selftext}
                       <br></br>
                       <div>
-                        <a href="/" target="_blank">
+                        <a href={currPost.url} target="_blank">
                           {currPost.url}
                         </a>
                       </div>
