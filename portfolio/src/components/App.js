@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SideNav from "./SideNav";
-import "./App.css";
+import "../styles/App.css";
 import Select from "react-select";
 import { subscriber, messageService } from "../messageService";
 
@@ -36,9 +36,7 @@ class App extends Component {
     this.setState({ activeLink: id });
   };
 
-  onImageLoad = (event) => {
-    console.log("img", event);
-  };
+  onImageLoad = (event) => {};
 
   renderPosts = (postType) => {
     this.setState({ value: postType });
@@ -47,7 +45,6 @@ class App extends Component {
     )
       .then((res) => {
         // Return the response in JSON format
-        console.log("Response", res.json);
         return res.json();
       })
       .then((res) => {
@@ -83,21 +80,21 @@ class App extends Component {
       selftextpost,
       authorpost,
     } = this.state;
-    console.log(JSON.stringify(this.state));
     return listPosts.length ? (
       <div>
         <br></br>
-        <p class="junioursubreddit">
-          Selected post panel: <br></br>
-          <span class="section">{this.state.titlepost}</span> <br></br>
-          <span class="section">{this.state.urlpost}</span>
-          <br></br>
-          <span class="section">{this.state.selftextpost}</span> <br></br>
-          <span class="section">{this.state.authorpost}</span>
-        </p>
+
         <React.Fragment>
           <h1>Selected Subreddit: '{this.state.selectedSubreddit.title}'</h1>
           <SideNav />
+          <p class="junioursubreddit">
+            Selected post panel: <br></br>
+            <span class="section">{this.state.titlepost}</span> <br></br>
+            <span class="section">{this.state.urlpost}</span>
+            <br></br>
+            <span class="section">{this.state.selftextpost}</span> <br></br>
+            <span class="section">{this.state.authorpost}</span>
+          </p>
         </React.Fragment>
         <div>
           {
@@ -132,18 +129,27 @@ class App extends Component {
                       )
                     }
                   >
-                    <div class="title"> {currPost.title} </div>
+                    <div class="title">
+                      {" "}
+                      {currPost.title} {currPost.title === activeLink}{" "}
+                    </div>
                     <div class="content">
                       {currPost.selftext}
                       <br></br>
-                      <span>${currPost.url}</span>
+                      <div>
+                        <a href="/" target="_blank">
+                          {currPost.url}
+                        </a>
+                      </div>
                     </div>
                     <br></br>
-                    <img
-                      src="https://i.redd.it/award_images/t5_22cerq/80j20o397jj41_NarwhalSalute.png"
-                      onLoad={this.onImageLoad(currPost)}
-                      class="image"
-                    />
+                    <div>
+                      <img
+                        src="https://i.redd.it/award_images/t5_22cerq/80j20o397jj41_NarwhalSalute.png"
+                        onLoad={this.onImageLoad(currPost)}
+                        class="image"
+                      />
+                    </div>
                     <br></br>
                     <div class="author"> Posted by {currPost.author} </div>
                     <br></br>

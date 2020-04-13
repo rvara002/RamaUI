@@ -1,15 +1,14 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from "rxjs";
 
-const subscriber = new BehaviorSubject({title: "javascript", url: '/r/javascript/'});
+const subscriber = new BehaviorSubject({
+  title: "javascript",
+  url: "/r/javascript/",
+});
 
 const messageService = {
-    send: function(msg){
-        subscriber.next(msg)
-        console.log('msg',msg)
-    }
-}
+  send: function (msg) {
+    subscriber.next(msg);
+  },
+};
 
-export {
-    messageService,
-    subscriber
-}
+export { messageService, subscriber };
